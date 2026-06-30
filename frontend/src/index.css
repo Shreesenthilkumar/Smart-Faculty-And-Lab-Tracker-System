@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   Design tokens — "campus directory / office door sign" identity.
+   This app is read by someone standing outside a door deciding whether to
+   knock, so the UI borrows from physical signage — nameplates, occupancy
+   lights, ID-badge typography — rather than a generic SaaS dashboard look.
+   ============================================================================ */
+@theme {
+  /* -- Surfaces -- */
+  --color-chalk: #f7f5f0;
+  --color-paper: #fffefb;
+  --color-hairline: #ddd6c5;
+
+  /* -- Ink (primary dark / text / nav) -- */
+  --color-ink: #1b2a4a;
+  --color-ink-soft: #364463;
+
+  /* -- Status palette --
+     AVAILABLE / FREE                        -> signal-green
+     BUSY / IN_CLASS / IN_MEETING / OCCUPIED -> amber-clay
+     ON_LEAVE / MAINTENANCE                  -> brick-red
+     neutral / informational                 -> slate
+  */
+  --color-signal-green: #2e7d5b;
+  --color-signal-green-soft: #e3eee8;
+  --color-amber-clay: #c97b2e;
+  --color-amber-clay-soft: #f6ead9;
+  --color-brick-red: #a6402f;
+  --color-brick-red-soft: #f3e1dc;
+  --color-slate: #5b6b82;
+  --color-slate-soft: #e8eaf0;
+
+  /* -- Type -- */
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-sans: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+}
+
+html {
+  font-family: var(--font-sans);
+}
+
+body {
+  background-color: var(--color-chalk);
+  color: var(--color-ink);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+}
+
+/* ----------------------------------------------------------------------------
+   Signature element: the occupancy light. Styled like a small recessed
+   panel-mount LED rather than a flat dot — a soft inset ring, a bright
+   center, and (when "live") a gentle halo so it reads as lit from across
+   the room, the way a real door-sign light would.
+   ---------------------------------------------------------------------------- */
+.status-light {
+  position: relative;
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0.5px 1px rgba(0, 0, 0, 0.35),
+    0 0 0 1.5px rgba(27, 42, 74, 0.08);
+}
+
+.status-light.is-live::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.18;
+  filter: blur(2px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .status-light.is-live::after {
+    animation: status-pulse 2.4s ease-in-out infinite;
+  }
+}
+
+@keyframes status-pulse {
+  0%, 100% { opacity: 0.12; transform: scale(0.95); }
+  50% { opacity: 0.28; transform: scale(1.08); }
+}
+
+/* Visible keyboard focus everywhere, including custom controls */
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
