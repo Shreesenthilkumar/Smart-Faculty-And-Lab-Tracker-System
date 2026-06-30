@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Smart Faculty & Lab Availability Tracking System
 
 A full-stack campus tool that lets students and staff see faculty availability and lab occupancy in real time.  
@@ -173,5 +172,3 @@ When anyone saves a status or occupancy change the backend immediately broadcast
 - [ ] Deploy frontend build (`npm run build` → `dist/`) to Netlify, Vercel, or serve from nginx
 - [ ] Update `app.cors.allowed-origins` to your production frontend URL
 =======
-# Smart-Faculty-And-Lab-Tracker-System
->>>>>>> b309f25216ae6f6f477919fb09958741f8215b9a
